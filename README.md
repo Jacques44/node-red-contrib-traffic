@@ -4,6 +4,7 @@
 ## Installation
 ```bash
 $npm install node-red-contrib-traffic
+```
 
 ## Usage
 
