@@ -20,11 +20,11 @@ npm install node-red-contrib-traffic
 
   I's also possible to configure the node in passing mode or blocking at startup
 
-## Example flow file
+## Example flow files
 
 	Try pasting in the flow file below that shows the node behaviour 
 
-    ```json
+    ```javascript
 	[{"id":"a724df44.58db2","type":"comment","z":"8d67b3ee.72985","name":"STOP configuration","info":"STOP message is configured to be also sent to the COP","x":226,"y":259,"wires":[]},{"id":"67d26698.982d98","type":"traffic","z":"8d67b3ee.72985","name":"Traffic sample","property_allow":"payload","filter_allow":"GO","ignore_case_allow":false,"send_allow":false,"property_stop":"payload","filter_stop":"stop","ignore_case_stop":true,"send_stop":true,"default_start":false,"x":362.5,"y":145,"wires":[["9513a40c.6aec58"]]},{"id":"16fff6d4.e90009","type":"inject","z":"8d67b3ee.72985","name":"","topic":"I'm a car","payload":"Cheers !","payloadType":"str","repeat":"2","crontab":"","once":true,"x":147.5,"y":141,"wires":[["67d26698.982d98"]]},{"id":"b822b6d3.47dd48","type":"inject","z":"8d67b3ee.72985","name":"GO","topic":"","payload":"GO","payloadType":"str","repeat":"","crontab":"","once":false,"x":117.5,"y":197,"wires":[["67d26698.982d98"]]},{"id":"70ef37c7.8f10c8","type":"inject","z":"8d67b3ee.72985","name":"","topic":"","payload":"STOP","payloadType":"str","repeat":"","crontab":"","once":false,"x":117.5,"y":238,"wires":[["67d26698.982d98"]]},{"id":"9513a40c.6aec58","type":"debug","z":"8d67b3ee.72985","name":"COP","active":true,"console":"false","complete":"payload","x":530.5,"y":186,"wires":[]},{"id":"1f216cdb.e0de93","type":"comment","z":"8d67b3ee.72985","name":"Traffic Light sample","info":"","x":187.5,"y":68,"wires":[]}]
     ```
 
