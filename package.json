@@ -9,6 +9,16 @@
         "nodes": {
             "traffic": "traffic/traffic.js"
         }
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Jacques44/node-red-contrib-traffic"
+      },
+      "license": "Apache-2.0",
+      "bugs": {
+            "url": "https://github.com/Jacques44/node-red-contrib-traffic/issues"
+      },
+      "homepage": "https://github.com/Jacques44/node-red-contrib-traffic",
+      "_id": "node-red-contrib-traffic@0.0.1",
 }
 
