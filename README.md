@@ -8,7 +8,7 @@ $npm install node-red-contrib-traffic
 
 ## Usage
 
-  This nodes accepts a `msg` and sends it according to its internal state. Its state may be "passing" or "blocking"
+  This nodes accepts a `msg` and sends it according to its internal state. Its state may be `passing` or `blocking`
 
   If in passing mode, a green circle is shown under the node and any incoming message is allowed and be ``sent``
   If in blocing mode, a red circle is shown under the node and any incoming message is ``dropped``.
@@ -16,7 +16,7 @@ $npm install node-red-contrib-traffic
   The `passing mode` is set by sending a message which will fit the configuration based on a property name and a regex.
   The `blocking mode` is also set by configuration
 
-  It's possible to let the control messages by sent by checking the right checkbox
+  It's possible to let the control messages be sent by checking the right checkbox
 
   I's also possible to configure the node in passing mode or blocking at startup
 
@@ -44,6 +44,10 @@ Unless required by applicable law or agreed to in writing, software distributed 
 "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. Please see the
 License for the specific language governing permissions and limitations under the License.
 
+## Feedback and Support
 
+Please report any issues or suggestions via the [Github Issues list for this repository](https://github.com/Jacques44/node-red-contrib-traffic/issues).
+
+For more information, feedback, or community support see the Node-Red Google groups forum at https://groups.google.com/forum/#!forum/node-red
 
 
