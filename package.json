@@ -1,0 +1,14 @@
+{
+    "name"         : "node-red-contrib-traffic",
+    "version"      : "0.0.1",
+    "description"  : "A traffic light node",
+    "dependencies": {
+    },
+    "keywords": [ "node-red" ],
+    "node-red"     : {
+        "nodes": {
+            "traffic": "traffic/traffic.js"
+        }
+    }
+}
+
