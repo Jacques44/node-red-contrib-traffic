@@ -13,12 +13,12 @@ npm install node-red-contrib-traffic
   This nodes accepts a `msg` and sends it according to its internal state. Its state may be `passing` or `blocking`
 
   If in passing mode, a green circle is shown under the node and any incoming message is allowed and be ``sent``
-  If in blocing mode, a red circle is shown under the node and any incoming message is ``dropped``.
+  If in blocking mode, a red circle is shown under the node and any incoming message is ``dropped``.
 
-  The `passing mode` is set by sending a message which will fit the configuration based on a property name and a regex.
+  The `passing mode` is set by sending a message which fit the configuration based on a property name and a regex.
   The `blocking mode` is also set by configuration
 
-  It's possible to let the control messages be sent by checking the right checkbox
+  It's possible to let the control messages pass by checking the right checkbox
 
   I's also possible to configure the node in passing mode or blocking at startup
 
