@@ -48,6 +48,7 @@ module.exports = function(RED) {
       rx_allow  = new RegExp(config.filter_allow, options);
     }
     catch (exception) {
+      node.error(exception);
     }
 
     // Build "stop" regex
@@ -57,6 +58,7 @@ module.exports = function(RED) {
       rx_stop  = new RegExp(config.filter_stop, options);
     }
     catch (exception) {
+      node.error(exception);
     }    
 
     // Source: http://stackoverflow.com/questions/6906108/in-javascript-how-can-i-dynamically-get-a-nested-property-of-an-object
@@ -82,32 +84,46 @@ module.exports = function(RED) {
     // If new message...
     this.on('input', function(msg) {
 
+      var other = true;
+
       var value = getPropByString(msg, config.property_allow);
 
       // If value for the "allow" property for the incoming message has the right "allow" value ... 
-      if (rx_allow != null && value && rx_allow.test(value)) {
+      if (rx_allow != null && value && !!(rx_allow.test(value) ^ config.negate_allow)) {
         // State is changed to "allow"
     		this.state(true);
         // If needed, also send the input message
     		if (config.send_allow) node.send(msg);
-        return;
+
+        other = false;
     	}
 
       value = getPropByString(msg, config.property_stop);
 
       // If value for the "stop" property for the incoming message has the right "stop" value ...
-    	if (rx_stop != null && value && rx_stop.test(value)) {
+    	if (other && rx_stop != null && value && !!(rx_stop.test(value) ^ config.negate_stop)) {
         // State is changed to "stop"
 		    this.state(false);
         // If needed, also send the input message
-    		if (config.send_stop) node.send(msg);  
-        return;
+    		if (config.send_stop) node.send(msg);
+
+        other = false;
     	}
 
       // Other cases, the message is sent only if in "allow" state
     	if (context.get('pass')) {
-    		node.send(msg);	
-    	}
+        // any stack?
+        (context.get('stack')||[]).forEach(function(msg) {
+          node.send(msg);
+        });
+        context.set('stack', []);
+    		if (other) node.send(msg);	
+    	} else {
+        if (other && config.differ) {
+          var store; (store = context.get('stack') || []).push(msg);
+          context.set('stack', store);
+        }
+      }
         
     });
 

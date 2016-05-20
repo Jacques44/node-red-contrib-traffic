@@ -37,7 +37,9 @@
   <div class="form-row">
     <label>&nbsp;</label>
     <input type="checkbox" id="node-input-ignore_case_allow" style="display: inline-block; width: auto; vertical-align: top;">
-    <label for="node-input-ignore_case_allow" style="width: 70%;">Ignore Case</label>  
+    <label for="node-input-ignore_case_allow" style="width: 30%;">Ignore Case</label>  
+    <input type="checkbox" id="node-input-negate_allow" style="display: inline-block; width: auto; vertical-align: top;">
+    <label for="node-input-negate_allow" style="width: 30%;">Negate</label>  
   </div>    
   <div class="form-row">
     <label>&nbsp;</label>
@@ -58,17 +60,20 @@
   <div class="form-row">
     <label>&nbsp;</label>
     <input type="checkbox" id="node-input-ignore_case_stop" style="display: inline-block; width: auto; vertical-align: top;">
-    <label for="node-input-ignore_case_stop" style="width: 70%;">Ignore Case</label>  
+    <label for="node-input-ignore_case_stop" style="width: 30%;">Ignore Case</label>  
+    <input type="checkbox" id="node-input-negate_stop" style="display: inline-block; width: auto; vertical-align: top;">
+    <label for="node-input-negate_stop" style="width: 30%;">Negate</label>  
   </div>   
   <div class="form-row">
     <label>&nbsp;</label>
     <input type="checkbox" id="node-input-send_stop" style="display: inline-block; width: auto; vertical-align: top;">
-    <label for="node-input-send_stop" style="width: 70%;">Resend</label>  
+    <label for="node-input-send_stop" style="width: 40%;">Resend</label>  
   </div>   
-  <div>
-    <label>
-      <input type="checkbox" id="node-input-default_start" > Allow Traffic by Default
-    </label>
+  <div class="form-row">
+    <input type="checkbox" id="node-input-default_start" style="display: inline-block; width: auto; vertical-align: top;">
+    <label for="node-input-default_start" style="width: 40%;">Allow by default</label>
+    <input type="checkbox" id="node-input-differ" style="display: inline-block; width: auto; vertical-align: top;">
+    <label for="node-input-differ" style="width: 40%;">Store unsent</label>
   </div>  
 </script>
 
@@ -98,6 +103,7 @@
             },
 
             ignore_case_allow: {value: false },
+            negate_allow: { value: false },
             send_allow: { value: false },
 
             // Stop configuration, property and value, resend flag
@@ -116,10 +122,12 @@
               }
             },             
             ignore_case_stop: {value: false },
+            negate_stop : { value: false },
             send_stop: { value: false },
 
             // Default state
-            default_start: { value: false }
+            default_start: { value: false },
+            differ: { value: false }
         },
 
         inputs:1,               // set the number of inputs - only 0 or 1
@@ -140,5 +148,7 @@
 </script>
 
 <script type="text/x-red" data-help-name="traffic">
-  <p>A node that filters messages using its controlled state as a traffic light. When the <i>allow</i> regexp matches the <i>allow</i> property value for the incoming message, the node will be in <b>allow</b> state and will send further incoming messages. As for the <i>allow</i> principle, the node will switch in <b>stop</b> mode if the <i>stop</i> regexp matches the <i>stop</i> property value for the incoming message and will not send any new incoming message.
+  <p>A node that filters messages using its controlled state as a traffic light. When the <i>allow</i> regexp matches the <i>allow</i> property value for the incoming message, the node will be in <b>allow</b> state and will send further incoming messages. As for the <i>allow</i> principle, the node will switch in <b>stop</b> mode if the <i>stop</i> regexp matches the <i>stop</i> property value for the incoming message and will not send any new incoming message.</p>
+  <p>It is possible to negate the regex</p>
+  <p>Traffic may be stored while not allowed and freed once allowed<p>
 </script>
