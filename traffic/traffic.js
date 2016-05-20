@@ -59,11 +59,33 @@ module.exports = function(RED) {
     catch (exception) {
     }    
 
+    // Source: http://stackoverflow.com/questions/6906108/in-javascript-how-can-i-dynamically-get-a-nested-property-of-an-object
+    function getPropByString(obj, propString) {
+        if (!propString)
+            return obj;
+
+        var prop, props = propString.split('.');
+
+        for (var i = 0, iLen = props.length - 1; i < iLen; i++) {
+            prop = props[i];
+
+            var candidate = obj[prop];
+            if (candidate !== undefined) {
+                obj = candidate;
+            } else {
+                break;
+            }
+        }
+        return obj[props[i]];
+    }
+
     // If new message...
     this.on('input', function(msg) {
 
+      var value = getPropByString(msg, config.property_allow);
+
       // If value for the "allow" property for the incoming message has the right "allow" value ... 
-      if (rx_allow != null && msg.hasOwnProperty(config.property_allow) && rx_allow.test(msg[config.property_allow])) {
+      if (rx_allow != null && value && rx_allow.test(value)) {
         // State is changed to "allow"
     		this.state(true);
         // If needed, also send the input message
@@ -71,8 +93,10 @@ module.exports = function(RED) {
         return;
     	}
 
+      value = getPropByString(msg, config.property_stop);
+
       // If value for the "stop" property for the incoming message has the right "stop" value ...
-    	if (rx_stop != null && msg.hasOwnProperty(config.property_stop) && rx_stop.test(msg[config.property_stop])) {
+    	if (rx_stop != null && value && rx_stop.test(value)) {
         // State is changed to "stop"
 		    this.state(false);
         // If needed, also send the input message
