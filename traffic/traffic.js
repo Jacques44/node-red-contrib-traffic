@@ -89,7 +89,7 @@ module.exports = function(RED) {
       var value = getPropByString(msg, config.property_allow);
 
       // If value for the "allow" property for the incoming message has the right "allow" value ... 
-      if (rx_allow != null && value && !!(rx_allow.test(value) ^ config.negate_allow)) {
+      if (rx_allow != null && value !== undefined && !!(rx_allow.test(value) ^ config.negate_allow)) {
         // State is changed to "allow"
     		this.state(true);
         // If needed, also send the input message
@@ -101,7 +101,7 @@ module.exports = function(RED) {
       value = getPropByString(msg, config.property_stop);
 
       // If value for the "stop" property for the incoming message has the right "stop" value ...
-    	if (other && rx_stop != null && value && !!(rx_stop.test(value) ^ config.negate_stop)) {
+    	if (other && rx_stop != null && value !== undefined && !!(rx_stop.test(value) ^ config.negate_stop)) {
         // State is changed to "stop"
 		    this.state(false);
         // If needed, also send the input message
